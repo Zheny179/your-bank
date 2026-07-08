@@ -1,0 +1,43 @@
+.logo {
+  color: var(--green-60);
+  
+  svg {
+    width: fluid(156, 100);
+    height: fluid(41, 26);
+  }
+  
+  &__text {
+    color: var(--absolute-white);
+  }
+  
+  &__rhombus {
+    transform-origin: 20px 20px;
+  }
+  
+  @include hover {
+    .logo__text {
+      color: var(--green-60);
+    }
+  }
+  
+  &:active {
+    scale: (1.02);
+  }
+  
+  @keyframes rotate-rhombus {
+    0%, 100% {
+      rotate: 0deg;
+      filter: none;
+    }
+    
+    50% {
+      rotate: 360deg;
+      filter: hue-rotate(45deg);
+    }
+  }
+  
+  .rhombus-animate {
+    animation: rotate-rhombus 2s ease-in-out infinite;
+  }
+}
+
