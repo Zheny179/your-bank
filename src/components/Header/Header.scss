@@ -1,0 +1,28 @@
+.header {
+  padding-top: 50px;
+  
+  &__inner {
+    @include flex-between;
+    
+    border: var(--border);
+    border-radius: var(--border-radius-100);
+    padding: fluid(20, 14) fluid(35, 24);
+    background-color: var(--grey-11);
+  }
+  
+  &__actions {
+    display: flex;
+    justify-content: end;
+    align-items: center;
+    gap: fluid(30, 20, 1920, 1440);
+    
+    .button--transparent{
+      padding: 0;
+      
+      @include hover {
+        background-color: transparent;
+        color: var(--green-60);
+      }
+    }
+  }
+}
