@@ -1,0 +1,29 @@
+.navigation {
+  color: var(--absolute-white);
+  
+  &__list {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  
+  &__item {
+    font-weight: 400;
+  }
+  
+  &__link {
+    padding: fluid(12, 10, 1920, 1440) fluid(24, 18, 1920, 1440);
+    border-radius: var(--border-radius-80);
+    
+    @include hover {
+      background-color: var(--grey-15);
+    }
+    
+    &--active {
+      background-color: var(--grey-15);
+      border-radius: var(--border-radius-80);
+      cursor: not-allowed;
+      pointer-events: none;
+    }
+  }
+}

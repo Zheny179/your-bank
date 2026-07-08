@@ -1,0 +1,41 @@
+---
+import './Navigation.scss'
+
+const currentURL = Astro.url.pathname
+const BASE_URL = import.meta.env.BASE_URL
+
+const navigationItems = [
+  { href: '', label: 'Home' },
+  { href: 'careers/', label: 'Careers' },
+  { href: 'about/', label: 'About' },
+  { href: 'security/', label: 'Security' },
+]
+---
+
+<nav class="navigation">
+  <ul class="navigation__list">
+    { navigationItems.map(({ href, label }) => {
+      const targetURL = `${ BASE_URL }${ href }`
+      const isActive = currentURL === targetURL
+
+      return (
+        <li class="navigation__item">
+          <a
+            class:list={ [
+              'navigation__link', {
+                'navigation__link--active': currentURL === targetURL
+              }
+            ] }
+            href={ targetURL }
+            style={ isActive
+              ? "view-transition-name: active-menu-indicator;"
+              : undefined }
+          >
+            { label }
+          </a>
+        </li>
+      )
+    }) }
+  </ul>
+</nav>
+
