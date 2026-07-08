@@ -1,0 +1,56 @@
+.container {
+  @include container;
+  
+  &-secondery {
+    width: 100%;
+    padding: fluid(25, 5) fluid(30, 20);
+    background: var(--bg-overlay);
+    border-radius: var(--border-radius-xl) var(--border-radius-xl) 0 0;
+    box-shadow: 0 0 12px 0 var(--neon-blue);
+    
+    @include laptop {
+      background: var(--bg-primary);
+      box-shadow: none;
+    }
+  }
+}
+
+.visually-hidden {
+  @include visually-hidden;
+}
+
+.visible-laptop {
+  @include laptop-above {
+    display: none !important;
+  }
+}
+
+.hidden-laptop {
+  @include laptop {
+    display: none !important;
+  }
+}
+
+.visible-tablet {
+  @include tablet-above {
+    display: none !important;
+  }
+}
+
+.hidden-tablet {
+  @include tablet {
+    display: none !important;
+  }
+}
+
+.visible-mobile {
+  @include mobile-above {
+    display: none !important;
+  }
+}
+
+.hidden-mobile {
+  @include mobile {
+    display: none !important;
+  }
+}

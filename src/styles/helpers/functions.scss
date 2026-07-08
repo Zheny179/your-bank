@@ -1,0 +1,37 @@
+@use 'sass:math';
+@use 'constants' as *;
+
+/// @param {Number} $max - Максимальное значение в пикселях
+/// @param {Number} $min - Минимальное значение в пикселях
+/// @param {Number} $max-vw - Ширина вьюпорта для $max (десктоп)
+/// @param {Number} $min-vw - Ширина вьюпорта для $min (мобильный)
+/// @return {String} - CSS-выражение clamp()
+
+@function fluid(
+  $max: 100,
+  $min: 10,
+  $max-vw: $container-desktop-width,
+  $min-vw: 390
+) {
+  @if $max <= $min {
+    @error 'fluid(): $max (#{$max}px) должен быть больше $min (#{$min}px).';
+  }
+  
+  @if $max-vw <= $min-vw {
+    @error 'fluid(): $max-vw (#{$max-vw}px) должен быть больше $min-vw (#{$min-vw}px).';
+  }
+  
+  $max-size: math.div($max, $base-font-size);
+  $min-size: math.div($min, $base-font-size);
+  $max-width: math.div($max-vw, $base-font-size);
+  $min-width: math.div($min-vw, $base-font-size);
+  
+  $slope: math.div(($max-size - $min-size), ($max-width - $min-width));
+  $y-axis-intersection: -$min-width * $slope + $min-size;
+  
+  @return clamp(
+    #{$min-size}rem,
+    calc(#{$y-axis-intersection}rem + #{$slope * 100}vw),
+    #{$max-size}rem
+  );
+}
