@@ -1,0 +1,36 @@
+---
+import './Button.scss'
+
+interface Props {
+  className?: string;
+  href?: string;
+  type?: 'button' | 'submit' | 'reset';
+  variant?: '' | 'transparent'
+}
+
+const {
+  className,
+  href,
+  type = 'button',
+  variant,
+  ...rest
+} = Astro.props
+
+const isButton = !href
+const Component = isButton ? 'button' : 'a'
+const componentProps = isButton
+  ? { type }
+  : { href }
+---
+
+<Component
+  class:list={ [
+    'button', className, {
+      'button--transparent': variant === 'transparent'
+    }
+  ] }
+  {...componentProps}
+  {...rest}
+>
+  <slot />
+</Component>

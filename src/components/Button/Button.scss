@@ -1,0 +1,30 @@
+.button {
+  font-weight: 400;
+  background-color: var(--green-60);
+  border-radius: var(--border-radius-80);
+  padding: fluid(14, 6) fluid(30, 14);
+  color: var(--grey-11);
+  border: var(--border-width-1) solid transparent;
+  
+  @include hover {
+    background-color: transparent;
+    border-color: var(--green-60);
+    color: var(--absolute-white);
+  }
+  
+  &:active {
+    scale: (1.02);
+  }
+  
+  &--transparent {
+    background-color: transparent;
+    color: var(--absolute-white);
+    border-color: transparent;
+    
+    @include hover {
+      background-color: var(--green-60);
+      border-color: transparent;
+      color: var(--grey-11);
+    }
+  }
+}
