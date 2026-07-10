@@ -1,0 +1,33 @@
+---
+import './BurgerMenu.scss';
+
+interface Props {
+  className?: string;
+  rest?: Record<string, string>;
+}
+
+const {
+  className,
+  rest
+} = Astro.props
+---
+
+<button
+  class:list={ ["burger-menu", className] }
+  type="button"
+  data-burger=""
+  { ...rest }
+>
+  <span
+    class="burger-menu__line"
+    aria-hidden="true"
+  />
+  <span
+    class="burger-menu__line"
+    aria-hidden="true"
+  />
+  <span
+    class="burger-menu__line"
+    aria-hidden="true"
+  />
+</button>
