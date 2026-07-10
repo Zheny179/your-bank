@@ -16,7 +16,7 @@
     align-items: center;
     gap: fluid(30, 20, 1920, 1440);
     
-    .button--transparent{
+    .button--transparent {
       padding: 0;
       
       @include hover {
