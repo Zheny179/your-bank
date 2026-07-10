@@ -10,9 +10,15 @@ const navigationItems = [
   { href: 'about/', label: 'About' },
   { href: 'security/', label: 'Security' },
 ]
+
+const { className, extraAttrs } = Astro.props
 ---
 
-<nav class="navigation">
+<nav
+  class:list={ [className, 'navigation'] }
+  aria-label="Основное меню"
+  {...extraAttrs}
+>
   <ul class="navigation__list">
     { navigationItems.map(({ href, label }) => {
       const targetURL = `${ BASE_URL }${ href }`
@@ -27,6 +33,8 @@ const navigationItems = [
               }
             ] }
             href={ targetURL }
+            aria-label={ label }
+            aria-current={ isActive ? 'page' : undefined }
             style={ isActive
               ? "view-transition-name: active-menu-indicator;"
               : undefined }
@@ -38,4 +46,3 @@ const navigationItems = [
     }) }
   </ul>
 </nav>
-
