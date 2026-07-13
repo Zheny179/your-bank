@@ -1,0 +1,58 @@
+---
+import './Section.scss'
+import Button from '@/components/Button/Button.astro'
+
+interface Props {
+  className?: string
+  isTabs?: boolean
+  isMarginL?: boolean
+  id?: string
+}
+
+const {
+  className,
+  isTabs = false,
+  isMarginL = false,
+  id,
+  ...restProps
+} = Astro.props
+
+const sectionId = id ||
+  `section-${ Astro.slots.has('header') ? 'labeled' : 'unnamed' }`
+const headingId = `${ sectionId }-title`
+
+const hasHeader = Astro.slots.has('header')
+---
+
+<section
+  class:list={ [
+    className, "section container", {
+      'section--margin-l': isMarginL,
+      'section--is-tabs': isTabs,
+    }
+  ] }
+  aria-labelledby={ hasHeader ? headingId : undefined }
+  {...restProps}
+>
+  <header class="section__header">
+    <div class="section__info">
+      <slot name="header" />
+    </div>
+    { isTabs && (
+      <div class="tabs">
+        <Button
+          variant="transparent"
+        >
+          Sign Up
+        </Button>
+        <Button
+        >
+          Login
+        </Button>
+      </div>
+    ) }
+  </header>
+  <div class="section__body">
+    <slot />
+  </div>
+</section>
