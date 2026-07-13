@@ -35,18 +35,18 @@ h5,
 .h5,
 h6,
 .h6 {
-  //  font-weight: 700;
-  //  color: var(--text-primary);
+  font-weight: 500;
+  color: var(--absolute-white);
 }
 
 h1,
 .h1 {
-  //  @include fluid-text(36, 32);
+  @include fluid-text(48, 28);
 }
 
 h2,
 .h2 {
-  //  @include fluid-text(32, 27);
+  //  @include fluid-text(48, 28);
 }
 
 h3,
