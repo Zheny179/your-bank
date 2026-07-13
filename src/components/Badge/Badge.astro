@@ -1,0 +1,31 @@
+---
+import { Icon } from 'astro-icon/components'
+import './Badge.scss'
+
+interface Props {
+  className?: string
+  iconName?: string
+  variant: '' | 'grey'
+}
+
+const {
+  className,
+  iconName,
+  variant = ''
+} = Astro.props
+---
+
+<div
+  class:list={ [
+    "badge", className, {
+      'badge--grey': variant === 'grey'
+    }
+  ] }
+>
+  { iconName && (
+    <span class="badge__icon">
+      <Icon name={ iconName } />
+    </span>
+  ) }
+  <slot />
+</div>

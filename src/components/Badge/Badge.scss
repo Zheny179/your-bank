@@ -1,0 +1,27 @@
+.badge {
+  @include fluid-text(18, 12);
+  
+  display: flex;
+  column-gap: 4px;
+  align-items: center;
+  padding: 8px 16px;
+  border: var(--border);
+  border-radius: var(--border-radius-70);
+  color: var(--absolute-white);
+  line-height: 1.3;
+  
+  &__icon {
+    @include fluid-text(24, 20);
+    
+    display: inline-flex;
+  }
+  
+  &--grey {
+    background-color: var(--grey-15);
+  }
+  
+  svg {
+    color: var(--green-60);
+    flex-shrink: 0;
+  }
+}
