@@ -1,0 +1,46 @@
+---
+import Image from 'astro/components/Image.astro'
+import './Hero.scss'
+import Section from '@/components/Section'
+
+import heroImage from '@/assets/images/hero/1.png'
+import Button from '@/components/Button/Button.astro'
+import Badge from '@/components/Badge/Badge.astro'
+
+const BASE_URL = import.meta.env.BASE_URL
+---
+
+<Section
+  className="hero"
+  id="products"
+>
+  <Fragment slot="header">
+    <Badge
+      variant="grey"
+      iconName="check"
+    >
+      No LLC Required, No Credit Check.
+    </Badge>
+    <h1 id="products-title">
+      Welcome to YourBank Empowering Your <span>Financial Journey</span>
+    </h1>
+    <p>
+      At YourBank, our mission is to provide comprehensive banking solutions
+      that empower individuals and businesses to achieve their financial
+      goals. We are committed to delivering personalized and innovative
+      services that prioritize our customers' needs.
+    </p>
+    <Button href={ `${BASE_URL}login/` }>
+      Open Account
+    </Button>
+  </Fragment>
+
+  <div class="hero__inner">
+    <Image
+      class="hero__img"
+      src={ heroImage }
+      loading="eager"
+      alt=""
+    />
+  </div>
+</Section>
