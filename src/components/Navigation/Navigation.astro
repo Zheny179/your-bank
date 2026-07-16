@@ -11,7 +11,7 @@ const navigationItems = [
   { href: 'security/', label: 'Security' },
 ]
 
-const { className, extraAttrs } = Astro.props
+const { className, extraAttrs, context = 'header' } = Astro.props
 ---
 
 <nav
@@ -36,7 +36,7 @@ const { className, extraAttrs } = Astro.props
             aria-label={ label }
             aria-current={ isActive ? 'page' : undefined }
             style={ isActive
-              ? "view-transition-name: active-menu-indicator;"
+              ? `view-transition-name: active-menu-indicator-${ context };`
               : undefined }
           >
             { label }
