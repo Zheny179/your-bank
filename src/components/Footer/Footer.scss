@@ -1,0 +1,163 @@
+.footer {
+  padding: 50px 0 30px;
+  background-color: var(--grey-11);
+  
+  @include tablet {
+    padding-bottom: calc(30px + 60px + env(safe-area-inset-bottom));
+  }
+  
+  &__inner {
+    display: flex;
+    flex-direction: column;
+    
+    gap: fluid(50, 30);
+  }
+  
+  &__top {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: fluid(50, 24);
+  }
+  
+  &__navigation {
+    @include show;
+    
+    .navigation__list {
+      flex-direction: row;
+      gap: 26px;
+    }
+    
+    .navigation__link {
+      background-color: transparent;
+      padding: 0;
+      
+      @include hover {
+        background-color: transparent;
+        color: var(--green-60);
+      }
+      
+      &--active {
+        color: var(--green-60);
+      }
+    }
+    
+  }
+  
+  &__body {
+    display: flex;
+    justify-content: center;
+    position: relative;
+    padding-block: fluid(50, 30);
+    
+    &::before,
+    &::after {
+      content: '';
+      position: absolute;
+      height: 1px;
+      width: 100%;
+      border: var(--border);
+    }
+    
+    &::before {
+      top: 0;
+    }
+    
+    &::after {
+      bottom: 0;
+    }
+    
+    ul {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 20px;
+      
+      svg {
+        color: var(--green-60);
+      }
+    }
+    
+    li {
+      display: flex;
+      align-items: center;
+      gap: 5px;
+    }
+    
+    @include tablet {
+      margin-bottom: 20px;
+    }
+  }
+  
+  &__contacts {
+    font-weight: 400;
+    color: var(--white-90);
+  }
+  
+  &__bottom {
+    @include flex-between;
+    
+    position: relative;
+    padding: 16px 30px;
+    border: var(--border);
+    background-color: var(--grey-10);
+    border-radius: var(--border-radius-100);
+    
+    @include tablet {
+      flex-direction: column;
+      gap: 20px;
+      border-radius: var(--border-radius-12);
+      padding: 50px 75px 30px 65px;
+    }
+  }
+  
+  &__soc1als {
+    ul {
+      display: flex;
+      gap: 15px;
+    }
+    
+    li {
+      background-color: var(--green-60);
+      border-radius: var(--border-radius-100);
+    }
+    
+    a {
+      padding: 14px;
+      color: var(--absolute-black);
+    }
+    
+    @include tablet {
+      @include abs-x;
+      top: -15%;
+    }
+  }
+  
+  &__legal {
+    text-wrap: nowrap;
+    display: flex;
+    //    gap: fluid(12,8);////
+    
+    &-link {
+      margin-right: fluid(12, 8);
+    }
+    
+    &-link:first-child {
+      position: relative;
+      
+      &::before {
+        content: '';
+        position: absolute;
+        right: -6%;
+        top: 0;
+        height: 100%;
+        width: 1px;
+        background-color: var(--grey-70);
+      }
+    }
+  }
+  
+  &__copyright {
+    text-wrap: nowrap;
+  }
+}

@@ -1,0 +1,105 @@
+---
+import './Footer.scss'
+import Logo from '@/components/Logo/Logo.astro'
+import Navigation from '@/components/Navigation/Navigation.astro'
+import { Icon } from 'astro-icon/components'
+
+const BASE_URL = import.meta.env.BASE_URL
+---
+
+<footer class="footer">
+  <div class="footer__inner container">
+    <div class="footer__top">
+      <Logo />
+      <Navigation
+        className="footer__navigation"
+        context="footer"
+      />
+    </div>
+    <div class="footer__body">
+      <ul class="footer__contacts">
+        <li class="footer__contacts-item">
+          <Icon name="letter" />
+          <a
+            class="footer__contacts-item"
+            href="mailto:hello@skillbirdge.com"
+          >
+            hello@skillbirdge.com
+          </a>
+        </li>
+        <li class="footer__contacts-item">
+          <Icon name="tel" />
+          <a
+            class="footer__contacts-link"
+            href="tel:+9191813232309"
+          >
+            +91 91813 23 2309
+          </a>
+        </li>
+        <li class="footer__contacts-item">
+          <Icon name="marker-map" />
+          <address class="footer__address">
+            Somewhere in the World
+          </address>
+        </li>
+      </ul>
+    </div>
+    <div class="footer__bottom">
+      <div class="footer__soc1als">
+        <ul class="-">
+          <li class="-">
+            <a
+              class="-"
+              href="https://facebook.com"
+              target="_blank"
+            >
+              <Icon
+                title="facebook"
+                name="facebook"
+              />
+            </a>
+          </li>
+          <li class="-">
+            <a
+              class="-"
+              href="https://twitter.com"
+              target="_blank"
+            >
+              <Icon
+                title="twitter"
+                name="twitter"
+              />
+            </a>
+          </li>
+          <li class="-">
+            <a
+              class="-"
+              href="https://linkedin.com"
+              target="_blank"
+            >
+              <Icon
+                title="LinkedIn"
+                name="in"
+              />
+            </a>
+          </li>
+        </ul>
+      </div>
+      <div class="footer__copyright">YourBank All Rights Reserved</div>
+      <div class="footer__legal">
+        <a
+          class="footer__legal-link"
+          href={ `${ BASE_URL }/privacy-policy` }
+        >
+          Privacy Policy
+        </a>
+        <a
+          class="footer__legal-link"
+          href={ `${ BASE_URL }/terms-of-service` }
+        >
+          Terms of Service
+        </a>
+      </div>
+    </div>
+  </div>
+</footer>
