@@ -4,7 +4,7 @@
   row-gap: fluid(80, 60);
   
   &--margin-l {
-    row-gap: 100px;
+    row-gap: fluid(100, 60);
   }
   
   &--is-tabs {
