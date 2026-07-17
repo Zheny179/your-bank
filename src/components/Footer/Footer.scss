@@ -9,7 +9,6 @@
   &__inner {
     display: flex;
     flex-direction: column;
-    
     gap: fluid(50, 30);
   }
   
@@ -41,7 +40,6 @@
         color: var(--green-60);
       }
     }
-    
   }
   
   &__body {
@@ -67,31 +65,41 @@
       bottom: 0;
     }
     
-    ul {
-      display: flex;
-      flex-wrap: wrap;
-      justify-content: center;
-      gap: 20px;
-      
-      svg {
-        color: var(--green-60);
-      }
-    }
-    
-    li {
-      display: flex;
-      align-items: center;
-      gap: 5px;
-    }
-    
     @include tablet {
       margin-bottom: 20px;
     }
   }
   
   &__contacts {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 20px;
     font-weight: 400;
     color: var(--white-90);
+    
+    svg {
+      color: var(--green-60);
+    }
+    
+    &-item {
+      position: relative;
+      display: flex;
+      align-items: center;
+      gap: 5px;
+    }
+    
+    &-link {
+      &::before {
+        content: '';
+        
+        @include abs-cover;
+      }
+      
+      @include hover {
+        color: var(--absolute-white);
+      }
+    }
   }
   
   &__bottom {
@@ -112,17 +120,30 @@
   }
   
   &__soc1als {
-    ul {
+    &-list {
       display: flex;
       gap: 15px;
     }
     
-    li {
+    &-item {
       background-color: var(--green-60);
       border-radius: var(--border-radius-100);
+      transition-duration: var(--transition-duration);
+      
+      &:active {
+        scale: (1.05);
+      }
+      
+      @include hover {
+        background-color: var(--absolute-black);
+        
+        svg {
+          color: var(--green-60);
+        }
+      }
     }
     
-    a {
+    &-link {
       padding: 14px;
       color: var(--absolute-black);
     }
@@ -136,22 +157,26 @@
   &__legal {
     text-wrap: nowrap;
     display: flex;
-    //    gap: fluid(12,8);////
+    align-items: stretch;
     
     &-link {
-      margin-right: fluid(12, 8);
+      align-items: center;
+      position: relative;
+      padding-inline: fluid(12, 8);
+      
+      @include hover {
+        color: var(--grey-40);
+      }
     }
     
-    &-link:first-child {
-      position: relative;
-      
-      &::before {
+    &-link:not(:last-child) {
+      &::after {
         content: '';
         position: absolute;
-        right: -6%;
+        right: 0;
         top: 0;
-        height: 100%;
         width: 1px;
+        height: 100%;
         background-color: var(--grey-70);
       }
     }
