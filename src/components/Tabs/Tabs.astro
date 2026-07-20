@@ -1,0 +1,112 @@
+---
+import './Tabs.scss'
+
+interface Props {
+  tabs: string[]
+  baseId: string
+}
+
+const {
+  tabs,
+  baseId
+} = Astro.props
+---
+
+<div
+  class="tabs"
+  role="tablist"
+>
+  { tabs.map((label, index) => (
+    <button
+      type="button"
+      class="tab"
+      role="tab"
+      id={ `${ baseId }-tab-${ index }` }
+      aria-controls={ `${ baseId }-panel-${ index }` }
+      aria-selected={ index === 0 ? 'true' : 'false' }
+      data-index={ index }
+    >
+      { label }
+    </button>
+  )) }
+
+  <span
+    class="tabs__indicator"
+    aria-hidden="true"
+  />
+</div>
+
+
+<script>
+  function initTabs() {
+    const tablists = document.querySelectorAll('[role="tablist"]')
+
+    tablists.forEach((tablist) => {
+      const tabs = tablist.querySelectorAll('[role="tab"]')
+      const indicator = tablist.querySelector('.tabs__indicator') as HTMLElement
+
+      if (!indicator) {
+        return
+      }
+
+      function moveIndicator(tab: HTMLElement) {
+        indicator.style.width = `${ tab.offsetWidth }px`
+        indicator.style.transform = `translateX(${ tab.offsetLeft }px)`
+      }
+
+      const activeTab = tablist.querySelector('[aria-selected="true"]')
+
+      if (activeTab) {
+        moveIndicator(activeTab as HTMLElement)
+      }
+
+      tabs.forEach((tab) => {
+        tab.addEventListener('click', () => {
+          if (tab.getAttribute('aria-selected') === 'true') {
+            return
+          }
+
+          const baseId = tab.id.split('-tab-')[0]
+          const panels = document.querySelectorAll(
+            `[id^="${ baseId }-panel-"]`
+          )
+
+          tabs.forEach((t) => t.setAttribute('aria-selected', 'false'))
+
+          tab.setAttribute('aria-selected', 'true')
+
+          moveIndicator(tab as HTMLElement)
+
+          panels.forEach((panel) => {
+            if (panel.id === tab.getAttribute('aria-controls')) {
+              panel.removeAttribute('hidden')
+            } else {
+              panel.setAttribute('hidden', '')
+            }
+          })
+        })
+      })
+    })
+
+    window.addEventListener('resize', () => {
+      tablists.forEach((tablist) => {
+        const indicator = tablist.querySelector('.tabs__indicator') as HTMLElement
+        const activeTab = tablist.querySelector(
+          '[aria-selected="true"]'
+        ) as HTMLElement
+
+        if (indicator && activeTab) {
+          indicator.style.transition = 'none'
+          indicator.style.width = `${ activeTab.offsetWidth }px`
+          indicator.style.transform = `translateX(${ activeTab.offsetLeft }px)`
+
+          requestAnimationFrame(() => {
+            indicator.style.transition = ''
+          })
+        }
+      })
+    })
+  }
+
+  document.addEventListener('astro:page-load', initTabs)
+</script>
