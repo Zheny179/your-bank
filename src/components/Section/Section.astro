@@ -1,17 +1,17 @@
 ---
 import './Section.scss'
-import Button from '@/components/Button/Button.astro'
+import Tabs from '@/components/Tabs/Tabs.astro'
 
 interface Props {
   className?: string
-  isTabs?: boolean
+  tabs?: string[]
   isMarginL?: boolean
   id?: string
 }
 
 const {
   className,
-  isTabs = false,
+  tabs,
   isMarginL = false,
   id,
   ...restProps
@@ -22,6 +22,7 @@ const sectionId = id ||
 const headingId = `${ sectionId }-title`
 
 const hasHeader = Astro.slots.has('header')
+const isTabs = tabs && tabs.length > 0
 ---
 
 <section
@@ -39,17 +40,10 @@ const hasHeader = Astro.slots.has('header')
       <slot name="header" />
     </div>
     { isTabs && (
-      <div class="tabs">
-        <Button
-          variant="transparent"
-        >
-          Sign Up
-        </Button>
-        <Button
-        >
-          Login
-        </Button>
-      </div>
+      <Tabs
+        tabs={ tabs }
+        baseId={ sectionId }
+      />
     ) }
   </header>
   <div class="section__body">
