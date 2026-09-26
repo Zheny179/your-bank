@@ -10,6 +10,7 @@
   &--is-tabs {
     .section__header {
       grid-template-columns: 57% 43%;
+      justify-items: end;
       
       @include laptop {
         grid-template-columns: 1fr;
@@ -21,7 +22,6 @@
   &__header {
     display: grid;
     grid-template-columns: 81% 19%;
-    justify-items: end;
     align-items: end;
     row-gap: 20px;
     
