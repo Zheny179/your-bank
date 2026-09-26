@@ -1,0 +1,117 @@
+.use-cases {
+  &__inner {
+    display: grid;
+    gap: fluid(60, 30);
+  }
+  
+  &__item {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 60px 100px;
+    
+    &:nth-child(even) {
+      direction: rtl;
+      
+      .use-cases__cards::before {
+        right: 0;
+        transform: scaleX(-1);
+        left: auto;
+        animation: move-bg-round-reversed 4s ease-in-out infinite alternate;
+        
+      }
+      
+      .use-cases__cards,
+      .use-cases__info {
+        direction: ltr;
+      }
+    }
+    
+    @include laptop {
+      grid-template-columns: 1fr;
+    }
+  }
+  
+  &__cards {
+    padding: fluid(50, 20);
+    border-radius: var(--border-radius-20);
+    position: relative;
+    background-color: var(--grey-11);
+    z-index: 0;
+    overflow: hidden;
+    &::before {
+      content: '';
+      position: absolute;
+      width: 220px;
+      height: 220px;
+      top: 0;
+      left: 0;
+      z-index: -1;
+      background: url("/src/assets/images/bg-round.png") no-repeat top left;
+      animation: move-bg-round 4s ease-in-out infinite alternate;
+    }
+    
+    &-list {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: fluid(20, 10);
+      text-align: center;
+    }
+    
+    &-item {
+      place-items: center;
+      border: var(--border);
+      padding: fluid(30, 20) fluid(30, 14);
+      background-color: var(--grey-10);
+      border-radius: var(--border-radius-16);
+    }
+    
+    &-icon {
+      margin-bottom: fluid(24, 14);
+    }
+    
+    &-title {
+      color: var(--absolute-white);
+    }
+  }
+  
+  &__info {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: fluid(62, 50);
+    
+    & .use-cases__intro {
+      display: grid;
+      row-gap: fluid(14, 10);
+    }
+    
+    @include laptop {
+      text-align: center;
+      align-items: center;
+    }
+  }
+  
+  &__button {
+    padding: fluid(18, 14) fluid(24, 20);
+  }
+}
+
+
+@keyframes move-bg-round {
+  0% {
+    transform: translate(0, 0) scale(1);
+  }
+  100% {
+    transform: translate(-20px, 20px) scale(1.2);
+  }
+}
+
+@keyframes move-bg-round-reversed {
+  0% {
+    transform: scaleX(-1) translate(0, 0) scale(1);
+  }
+  100% {
+    transform: scaleX(-1) translate(20px, 20px) scale(1.2);
+  }
+}
