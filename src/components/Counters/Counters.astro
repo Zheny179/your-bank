@@ -1,0 +1,24 @@
+---
+import './Counters.scss'
+
+interface CounterItem {
+  value: string | number,
+  desc: string,
+}
+
+interface Props {
+  className?: string;
+  countersArray?: CounterItem[];
+}
+
+const { className, countersArray } = Astro.props
+---
+
+<div class:list={ ["counters", className] }>
+  { countersArray?.map(({ value, desc }) => (
+    <div class="counters__item">
+      <span class="counters__value">{ value }</span>
+      { desc }
+    </div>
+  )) }
+</div>
