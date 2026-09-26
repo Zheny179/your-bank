@@ -1,7 +1,8 @@
 ---
-import { Icon } from 'astro-icon/components'
 import './OurProducts.scss'
 import Section from '@/components/Section'
+import Icon from '@/components/Icon/Icon.astro'
+import { Icon as AstroIcon } from 'astro-icon/components'
 
 const OurProductsItems = [
   {
@@ -76,13 +77,12 @@ const OurProductsItems = [
       >
         <ul class="our-products__cards">
           { panel.items.map(({ title, desc, icon }) => (
+
             <li class="our-products__item">
-              <div
-                class="our-products__icon"
-                aria-hidden="true"
-              >
-                <Icon name={ icon } />
-              </div>
+               <Icon
+                 className="our-products__icon"
+                 iconName={ icon }
+               />
               <h3 class="our-products__title">{ title }</h3>
               <p class="our-products__desc">{ desc }</p>
             </li>
