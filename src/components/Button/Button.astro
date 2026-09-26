@@ -5,7 +5,7 @@ interface Props {
   className?: string;
   href?: string;
   type?: 'button' | 'submit' | 'reset';
-  variant?: '' | 'transparent'
+  variant?: '' | 'transparent' | 'dark'
 }
 
 const {
@@ -26,7 +26,8 @@ const componentProps = isButton
 <Component
   class:list={ [
     'button', className, {
-      'button--transparent': variant === 'transparent'
+      'button--transparent': variant === 'transparent',
+      'button--dark': variant === 'dark',
     }
   ] }
   {...componentProps}

@@ -27,4 +27,10 @@
       color: var(--grey-11);
     }
   }
+  
+  &--dark {
+    background-color: var(--grey-11);
+    color: var(--absolute-white);
+    border: var(--border);
+  }
 }
