@@ -1,0 +1,24 @@
+---
+import './Icon.scss'
+import { Icon as AstroIcon } from 'astro-icon/components'
+
+interface Props {
+  className?: string;
+  iconName: string;
+  iconSize?: string;
+}
+
+const { className, iconName, iconSize } = Astro.props
+---
+
+<div
+  class:list={ [
+    "icon", className, {
+      'icon--small': iconSize === 'small',
+      'icon--big': iconSize === 'big',
+    }
+  ] }
+  aria-hidden="true"
+>
+  <AstroIcon name={ iconName } />
+</div>
