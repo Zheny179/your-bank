@@ -87,6 +87,7 @@
     }
     
     @include laptop {
+      order: 1;
       text-align: center;
       align-items: center;
     }
