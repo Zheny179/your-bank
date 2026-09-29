@@ -9,15 +9,13 @@
     grid-template-columns: repeat(2, 1fr);
     gap: 60px 100px;
     
-    &:nth-child(even) {
+    &:nth-child(odd) {
       direction: rtl;
       
       .use-cases__cards::before {
-        right: 0;
-        transform: scaleX(-1);
-        left: auto;
+        left: 0;
+        right: auto;
         animation: move-bg-round-reversed 4s ease-in-out infinite alternate;
-        
       }
       
       .use-cases__cards,
@@ -38,16 +36,18 @@
     background-color: var(--grey-11);
     z-index: 0;
     overflow: hidden;
+    
     &::before {
       content: '';
       position: absolute;
       width: 220px;
       height: 220px;
       top: 0;
-      left: 0;
+      right: 0;
       z-index: -1;
       background: url("/src/assets/images/bg-round.png") no-repeat top left;
       animation: move-bg-round 4s ease-in-out infinite alternate;
+      transform: scaleX(-1);
     }
     
     &-list {
@@ -100,18 +100,18 @@
 
 @keyframes move-bg-round {
   0% {
-    transform: translate(0, 0) scale(1);
+    transform: scaleX(-1) translate(0, 0) scale(1);
   }
   100% {
-    transform: translate(-20px, 20px) scale(1.2);
+    transform: scaleX(-1) translate(-20px, 20px) scale(1.2);
   }
 }
 
 @keyframes move-bg-round-reversed {
   0% {
-    transform: scaleX(-1) translate(0, 0) scale(1);
+    transform: translate(0, 0) scale(1);
   }
   100% {
-    transform: scaleX(-1) translate(20px, 20px) scale(1.2);
+    transform: translate(20px, 20px) scale(1.2);
   }
 }

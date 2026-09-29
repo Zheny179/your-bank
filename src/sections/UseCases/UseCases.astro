@@ -60,12 +60,14 @@ const useCasesData = [
     title: 'For Individuals',
     desc: 'For individuals, our mortgage services pave the way to homeownership, and our flexible personal loans provide vital support during various life milestones. We also prioritize retirement planning, ensuring a financially secure future for our customers',
     counters: forIndividualsCounters,
+    h4: 'Financial Goals',
     goals: personalGoals
   },
   {
     title: 'For Business',
-    desc: ' For businesses, we empower growth with working capital solutions that optimize cash flow, and our tailored financing options fuel business expansion. Whatever your financial aspirations, YourBank is committed to providing the right tools and support to achieve them',
+    desc: 'For businesses, we empower growth with working capital solutions that optimize cash flow, and our tailored financing options fuel business expansion. Whatever your financial aspirations, YourBank is committed to providing the right tools and support to achieve them',
     counters: forBusinessCounters,
+    h4: 'Our Financial Solutions',
     goals: businessGoals
   },
 ]
@@ -90,26 +92,11 @@ const useCasesData = [
 
   <div class="use-cases__inner">
 
-    { useCasesData.map(({ title, desc, counters, goals }) => (
+    { useCasesData.map(({ title, desc, counters, h4, goals }) => (
       <div class="use-cases__item">
-        <div class="use-cases__cards">
-          <h2 class="visually-hidden">Financial Goals</h2>
-          <ul class="use-cases__cards-list">
-            { goals.map(({ iconName, title: goalsTitle }) => (
-              <li class="use-cases__cards-item">
-                <Icon
-                  className="use-cases__cards-icon"
-                  iconName={ iconName }
-                  iconSize="small"
-                />
-                <p class="use-cases__cards-title">{ goalsTitle }</p>
-              </li>
-            )) }
-          </ul>
-        </div>
         <div class="use-cases__info">
           <div class="use-cases__intro">
-            <h2 class="use-cases__intro-title">{ title }</h2>
+            <h3 class="use-cases__intro-title h2">{ title }</h3>
             <p class="use-cases__intro-desc">{ desc }</p>
           </div>
 
@@ -124,6 +111,21 @@ const useCasesData = [
           >
             Learn More
           </Button>
+        </div>
+        <div class="use-cases__cards">
+          <h4 class="visually-hidden">{ h4 }</h4>
+          <ul class="use-cases__cards-list">
+            { goals.map(({ iconName, title: goalsTitle }) => (
+              <li class="use-cases__cards-item">
+                <Icon
+                  className="use-cases__cards-icon"
+                  iconName={ iconName }
+                  iconSize="small"
+                />
+                <p class="use-cases__cards-title">{ goalsTitle }</p>
+              </li>
+            )) }
+          </ul>
         </div>
       </div>
     )) }
