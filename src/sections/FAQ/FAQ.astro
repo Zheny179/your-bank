@@ -1,0 +1,171 @@
+---
+import './FAQ.scss'
+import Section from '@/components/Section/Section.astro'
+import Button from '@/components/Button/Button.astro'
+
+interface FaqItem {
+  title: string
+  desc: string
+}
+
+const faqItems: FaqItem[] = [
+  {
+    title: 'How do I open an account with YourBank?',
+    desc: 'Opening an account with YourBank is easy. Simply visit our website and click on the "Open an Account" button. Follow the prompts, provide the required information, and complete the application process. If you have any questions or need assistance, our customer support team is available to help.',
+  },
+  {
+    title: 'What types of accounts does YourBank offer?',
+    desc: 'The documents required for a loan application may vary depending on the type of loan you are applying for. Generally, you will need to provide identification documents (such as a passport or driver\'s license), proof of income (such as pay stubs or tax returns), and information about the collateral (if applicable). Our loan officers will guide you through the specific requirements during the application process.',
+  },
+  {
+    title: 'How can I access my accounts online?',
+    desc: 'Accessing your accounts online is simple and secure. Visit our website and click on the "Login" button. Enter your username and password to access your accounts. If you haven\'t registered for online banking, click on the "Enroll Now" button and follow the registration process. If you need assistance, our customer support team is available to guide you.',
+  },
+  {
+    title: 'Are my transactions and personal information secure?',
+    desc: 'At YourBank, we prioritize the security of your transactions and personal information. We employ industry-leading encryption and multi-factor authentication to ensure that your data is protected. Additionally, we regularly update our security measures to stay ahead of emerging threats. You can bank with confidence knowing that we have robust security systems in place.',
+  },
+
+  {
+    title: 'How do I open an account with YourBank 2?',
+    desc: 'Opening an account with YourBank is easy. Simply visit our website and click on the "Open an Account" button. Follow the prompts, provide the required information, and complete the application process. If you have any questions or need assistance, our customer support team is available to help.',
+  },
+  {
+    title: 'What types of accounts does YourBank offer 2?',
+    desc: 'The documents required for a loan application may vary depending on the type of loan you are applying for. Generally, you will need to provide identification documents (such as a passport or driver\'s license), proof of income (such as pay stubs or tax returns), and information about the collateral (if applicable). Our loan officers will guide you through the specific requirements during the application process.',
+  },
+  {
+    title: 'How can I access my accounts online 2?',
+    desc: 'Accessing your accounts online is simple and secure. Visit our website and click on the "Login" button. Enter your username and password to access your accounts. If you haven\'t registered for online banking, click on the "Enroll Now" button and follow the registration process. If you need assistance, our customer support team is available to guide you.',
+  },
+  {
+    title: 'Are my transactions and personal information secure 2?',
+    desc: 'At YourBank, we prioritize the security of your transactions and personal information. We employ industry-leading encryption and multi-factor authentication to ensure that your data is protected. Additionally, we regularly update our security measures to stay ahead of emerging threats. You can bank with confidence knowing that we have robust security systems in place.',
+  },
+
+  {
+    title: 'How do I open an account with YourBank 3?',
+    desc: 'Opening an account with YourBank is easy. Simply visit our website and click on the "Open an Account" button. Follow the prompts, provide the required information, and complete the application process. If you have any questions or need assistance, our customer support team is available to help.',
+  },
+  {
+    title: 'What types of accounts does YourBank offer 3?',
+    desc: 'The documents required for a loan application may vary depending on the type of loan you are applying for. Generally, you will need to provide identification documents (such as a passport or driver\'s license), proof of income (such as pay stubs or tax returns), and information about the collateral (if applicable). Our loan officers will guide you through the specific requirements during the application process.',
+  },
+  {
+    title: 'How can I access my accounts online 3?',
+    desc: 'Accessing your accounts online is simple and secure. Visit our website and click on the "Login" button. Enter your username and password to access your accounts. If you haven\'t registered for online banking, click on the "Enroll Now" button and follow the registration process. If you need assistance, our customer support team is available to guide you.',
+  },
+  {
+    title: 'Are my transactions and personal information secure 3?',
+    desc: 'At YourBank, we prioritize the security of your transactions and personal information. We employ industry-leading encryption and multi-factor authentication to ensure that your data is protected. Additionally, we regularly update our security measures to stay ahead of emerging threats. You can bank with confidence knowing that we have robust security systems in place.',
+  },
+]
+
+const visibleCards = faqItems.slice(0, 4)
+const hiddenCards = faqItems.slice(4)
+---
+
+<Section
+  className="faq"
+  id="faq"
+>
+  <Fragment slot="header">
+    <h2
+      id="faq-title"
+      class="h1"
+    >
+      <span>Frequently</span> Asked Questions
+    </h2>
+    <p>
+      Still you have any questions? Contact our Team via&nbsp;
+      <a
+        class="faq__email"
+        href="mailto:support@yourbank.com"
+      >
+        support@yourbank.com
+      </a>
+    </p>
+  </Fragment>
+
+  <div class="faq__inner">
+    <div class="faq__cards">
+      <div class="faq__grid">
+        { visibleCards.map(({ title, desc }) => (
+          <div class="faq__card">
+            <h3 class="faq__card-title">{ title }</h3>
+            <p class="faq__card-desc">{ desc }</p>
+          </div>
+        )) }
+      </div>
+
+      <div
+        class="faq__more"
+        id="faqMore"
+      >
+        <div class="faq__more-inner">
+          <div class="faq__grid">
+            { hiddenCards.map(({ title, desc }) => (
+              <div class="faq__card">
+                <h3 class="faq__card-title">{ title }</h3>
+                <p class="faq__card-desc">{ desc }</p>
+              </div>
+            )) }
+          </div>
+        </div>
+      </div>
+    </div>
+    <Button
+      className="faq__load"
+      variant="dark"
+      id="faqLoadBtn"
+    >
+      <span class="faq__load-text">
+        Load All FAQ’s
+      </span>
+      <svg
+        class="faq__load-arrow"
+        width="22"
+        height="22"
+        viewBox="0 0 22 22"
+        fill="none"
+        xmlns="http://www.w3.org/2000/svg"
+      >
+        <path
+          d="M16.5 8.25L11 13.75L5.5 8.25"
+          stroke="white"
+          stroke-width="2"
+        />
+      </svg>
+    </Button>
+  </div>
+</Section>
+<script>
+  const loadBtn = document.getElementById('faqLoadBtn')
+  const moreBlock = document.getElementById('faqMore')
+  const cardsBlock = document.querySelector('.faq__cards')
+  const faqSection = document.querySelector('.faq') as HTMLElement
+
+  if (loadBtn && moreBlock && cardsBlock) {
+    let isExpanded = false
+
+    loadBtn.addEventListener('click', () => {
+      const textSpan = loadBtn.querySelector('.faq__load-text')
+
+      isExpanded = !isExpanded
+
+      if (isExpanded) {
+        faqSection.style.overflowAnchor = 'none'
+      } else {
+        faqSection.style.overflowAnchor = 'auto'
+      }
+
+      loadBtn.classList.toggle('faq__load--active', isExpanded)
+      cardsBlock.classList.toggle('faq__cards--expanded', isExpanded)
+
+
+      if (textSpan) {
+        textSpan.textContent = isExpanded ? 'Hide FAQ’s' : 'Load All FAQ’s'
+      }
+    })
+  }
+</script>
