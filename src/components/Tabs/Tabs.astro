@@ -4,16 +4,20 @@ import './Tabs.scss'
 interface Props {
   tabs: string[]
   baseId: string
+  className?: string
+  showIndicator?: boolean
 }
 
 const {
   tabs,
-  baseId
+  baseId,
+  className,
+  showIndicator = true
 } = Astro.props
 ---
 
 <div
-  class="tabs"
+  class:list={ ['tabs', className] }
   role="tablist"
 >
   { tabs.map((label, index) => (
@@ -30,10 +34,10 @@ const {
     </button>
   )) }
 
-  <span
+  { showIndicator && (<span
     class="tabs__indicator"
     aria-hidden="true"
-  />
+  />) }
 </div>
 
 
@@ -43,13 +47,13 @@ const {
 
     tablists.forEach((tablist) => {
       const tabs = tablist.querySelectorAll('[role="tab"]')
-      const indicator = tablist.querySelector('.tabs__indicator') as HTMLElement
-
-      if (!indicator) {
-        return
-      }
+      const indicator = tablist.querySelector('.tabs__indicator') as HTMLElement | null
 
       function moveIndicator(tab: HTMLElement) {
+        if (!indicator) {
+          return
+        }
+
         indicator.style.width = `${ tab.offsetWidth }px`
         indicator.style.transform = `translateX(${ tab.offsetLeft }px)`
       }
