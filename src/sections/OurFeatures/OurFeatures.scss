@@ -1,0 +1,115 @@
+.our-features {
+  &__inner {
+    display: grid;
+    grid-template-columns: 19.25% minmax(360px, 80.75%);
+    gap: fluid(30, 20, 1600, 1440);
+    
+    @include laptop {
+      grid-template-columns: minmax(250px, 1fr);
+    }
+  }
+  
+  &__sidebar {
+    background-color: var(--grey-11);
+    display: flex;
+    align-self: flex-start;
+    padding: fluid(50, 40, 1600, 1440);
+    border-radius: var(--border-radius-12);
+    
+    @include laptop {
+      padding: fluid(40, 20, 1440);
+      border-radius: var(--border-radius-10);
+    }
+  }
+  
+  &__tabs {
+    flex-direction: column;
+    padding: 0;
+    gap: fluid(24, 20, 1600, 1440);
+    width: 100%;
+    border: none;
+    border-radius: 0;
+    background-color: transparent;
+    
+    .tab {
+      padding: fluid(18, 14) 0 fluid(18, 14) fluid(24, 20);
+      text-align: left;
+      border-radius: var(--border-radius-100);
+      color: var(--absolute-white);
+      background-color: var(--grey-11);
+      border: var(--border);
+      
+      @include laptop {
+        padding: 14px 20px;
+      }
+      
+      @include mobile {
+        flex-shrink: 0;
+        scroll-snap-align: start;
+      }
+    }
+    
+    .tab[aria-selected='true'] {
+      background-color: var(--grey-10);
+      color: var(--green-60);
+    }
+    
+    @include laptop {
+      flex-direction: row;
+    }
+    
+    @include mobile {
+      overflow-x: auto;
+      overflow-y: hidden;
+      flex-wrap: nowrap;
+      scroll-snap-type: x mandatory;
+      padding-bottom: 12px;
+      
+      &::-webkit-scrollbar {
+        height: 6px;
+      }
+      
+      &::-webkit-scrollbar-track {
+        background: transparent;
+      }
+      
+      &::-webkit-scrollbar-thumb {
+        background-color: var(--green-60);
+        border-radius: 10px;
+      }
+      
+      scrollbar-width: thin;
+      scrollbar-color: var(--green-60) transparent;
+    }
+  }
+  
+  &__content {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(360px, 1fr));
+    gap: fluid(30, 20, 1600, 1440);
+    
+    @include laptop {
+      grid-template-columns: 1fr;
+    }
+  }
+  
+  &__block {
+    background-color: var(--grey-11);
+    padding: fluid(50, 30);
+    border-radius: var(--border-radius-12);
+    border: var(--border);
+    display: grid;
+    gap: fluid(30, 20);
+    
+    @include laptop {
+      border-radius: var(--border-radius-10);
+    }
+  }
+  
+  &__header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    color: var(--green-60);
+  }
+}

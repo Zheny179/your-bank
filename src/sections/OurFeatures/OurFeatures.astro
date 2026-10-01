@@ -1,0 +1,136 @@
+---
+import './OurFeatures.scss'
+import Section from '@/components/Section/Section.astro'
+import Tabs from '@/components/Tabs/Tabs.astro'
+
+const OurFeaturesItems = [
+  {
+    tabName: 'Online Banking',
+    items: [
+      {
+        title: '24/7 Account Access',
+        desc: 'Enjoy the convenience of accessing your accounts anytime, anywhere through our secure online banking platform. Check balances, transfer funds, and pay bills with ease.',
+      },
+      {
+        title: 'Mobile Banking App',
+        desc: 'Stay connected to your finances on the go with our user-friendly mobile banking app. Easily manage your accounts, deposit checks, and make payments from your smartphone or tablet.',
+      },
+      {
+        title: 'Secure Transactions',
+        desc: 'Rest assured knowing that your transactions are protected by industry-leading security measures. We employ encryption and multi-factor authentication to safeguard your financial information.',
+      },
+      {
+        title: 'Bill Pay and Transfers',
+        desc: 'Save time and avoid late fees with our convenient bill pay service. Set up recurring payments or make one-time transfers between your accounts with just a few clicks.',
+      },
+    ],
+  },
+  {
+    tabName: 'Financial Tools',
+    items: [
+      {
+        title: '24/7 Account Access 2',
+        desc: 'Enjoy the convenience of accessing your accounts anytime, anywhere through our secure online banking platform. Check balances, transfer funds, and pay bills with ease.',
+      },
+      {
+        title: 'Mobile Banking App 2',
+        desc: 'Stay connected to your finances on the go with our user-friendly mobile banking app. Easily manage your accounts, deposit checks, and make payments from your smartphone or tablet.',
+      },
+      {
+        title: 'Secure Transactions 2',
+        desc: 'Rest assured knowing that your transactions are protected by industry-leading security measures. We employ encryption and multi-factor authentication to safeguard your financial information.',
+      },
+      {
+        title: 'Bill Pay and Transfers 2',
+        desc: 'Save time and avoid late fees with our convenient bill pay service. Set up recurring payments or make one-time transfers between your accounts with just a few clicks.',
+      },
+    ],
+  },
+  {
+    tabName: 'Customer Support',
+    items: [
+      {
+        title: '24/7 Account Access 3',
+        desc: 'Enjoy the convenience of accessing your accounts anytime, anywhere through our secure online banking platform. Check balances, transfer funds, and pay bills with ease.',
+      },
+      {
+        title: 'Mobile Banking App 3',
+        desc: 'Stay connected to your finances on the go with our user-friendly mobile banking app. Easily manage your accounts, deposit checks, and make payments from your smartphone or tablet.',
+      },
+      {
+        title: 'Secure Transactions 3',
+        desc: 'Rest assured knowing that your transactions are protected by industry-leading security measures. We employ encryption and multi-factor authentication to safeguard your financial information.',
+      },
+      {
+        title: 'Bill Pay and Transfers 3',
+        desc: 'Save time and avoid late fees with our convenient bill pay service. Set up recurring payments or make one-time transfers between your accounts with just a few clicks.',
+      },
+    ],
+  },
+]
+---
+
+<Section
+  className="our-features"
+  id="our-features"
+>
+  <Fragment slot="header">
+    <h2
+      id="our-features-title"
+      class="h1"
+    >
+      Our <span>Features</span>
+    </h2>
+    <p>
+      Experience a host of powerful features at YourBank, including seamless
+      online banking, secure transactions, and personalized financial insights,
+      all designed to enhance your banking experience
+    </p>
+  </Fragment>
+
+  <div class="our-features__inner">
+    <div class="our-features__sidebar">
+      <Tabs
+        className="our-features__tabs"
+        showIndicator={ false }
+        tabs={ OurFeaturesItems.map((tab) => tab.tabName) }
+        baseId="our-features"
+      />
+    </div>
+    { OurFeaturesItems.map((panel, index) => (
+      <div
+        role="tabpanel"
+        id={ `our-features-panel-${ index }` }
+        aria-labelledby={ `our-features-tab-${ index }` }
+        hidden={ index !== 0 }
+      >
+        <div class="our-features__content">
+          { panel.items.map(({ title, desc }) => (
+            <div class="our-features__block">
+              <div class="our-features__header">
+                <h3 class="our-features__title">{ title }</h3>
+                <svg
+                  width="34"
+                  height="34"
+                  viewBox="0 0 34 34"
+                  fill="none"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <path
+                    d="M8.50007 26.9166L26.9167 8.49994M9.23673 8.49994H26.9167V26.1799"
+                    stroke="#CAFF33"
+                    stroke-width="2"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                  />
+                </svg>
+              </div>
+              <p class="our-features__desc">{ desc }</p>
+            </div>
+          )) }
+        </div>
+      </div>
+    )) }
+  </div>
+
+</Section>
