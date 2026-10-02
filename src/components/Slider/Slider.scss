@@ -1,0 +1,64 @@
+.slider {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  gap: 50px;
+  
+  & &__container {
+    width: 100%;
+    flex: 1;
+    overflow: hidden;
+    min-width: 0;
+    position: relative;
+    
+    &::before,
+    &::after {
+      content: '';
+      width: 45%;
+      height: 100%;
+      position: absolute;
+      top: 0;
+      pointer-events: none;
+      z-index: 2;
+    }
+    
+    &::before {
+      left: 0;
+      background: linear-gradient(270deg, rgba(25, 25, 25, 0) 0%, var(--grey-10) 105.84%);
+    }
+    
+    &::after {
+      right: 0;
+      background: linear-gradient(270deg, var(--grey-10) 10.8%, rgba(25, 25, 25, 0) 105.84%);
+    }
+  }
+  
+  &__wrapper {
+  }
+  
+  &__slide {
+    height: auto;
+    pointer-events: none;
+    user-select: none;
+  }
+  
+  &__button {
+    cursor: pointer;
+    flex-shrink: 0;
+    border: var(--border);
+    border-radius: var(--border-radius-100);
+    padding: 14px;
+    display: inline-flex;
+    color: var(--green-60);
+    background-color: var(--grey-11);
+    transition-duration: var(--transition-duration);
+    
+    @include hover {
+      border-color: var(--green-60);
+    }
+    
+    &:active {
+      scale: 1.01;
+    }
+  }
+}

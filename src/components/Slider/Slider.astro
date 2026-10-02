@@ -1,0 +1,115 @@
+---
+import './Slider.scss'
+
+interface Props {
+  className?: string;
+}
+
+const { className } = Astro.props
+---
+
+<div class:list={ ["slider", className] }>
+  <div class="slider__button slider__button-prev swiper-button-prev">
+    <svg
+      width="34"
+      height="34"
+      viewBox="0 0 34 34"
+      fill="none"
+      xmlns="http://www.w3.org/2000/svg"
+    >
+      <path
+        d="M26.2083 17H8.5M17 25.5L8.5 17L17 8.5"
+        stroke="#CAFF33"
+        stroke-width="2"
+        stroke-linecap="round"
+        stroke-linejoin="round"
+      />
+    </svg>
+  </div>
+  <div class="swiper slider__container">
+    <div class="swiper-wrapper slider__wrapper">
+      <slot />
+    </div>
+
+  </div>
+  <div class="slider__button slider__button-next swiper-button-next">
+    <svg
+      width="34"
+      height="34"
+      viewBox="0 0 34 34"
+      fill="none"
+      xmlns="http://www.w3.org/2000/svg"
+    >
+      <path
+        d="M8.50016 17H26.2085M17.7085 25.5L26.2085 17L17.7085 8.5"
+        stroke="#CAFF33"
+        stroke-width="2"
+        stroke-linecap="round"
+        stroke-linejoin="round"
+      />
+    </svg>
+  </div>
+</div>
+
+<script>
+  import Swiper from 'swiper'
+  import { Navigation, Autoplay } from 'swiper/modules'
+  import 'swiper/css'
+
+  function initSliders() {
+    const sliders = document.querySelectorAll('.slider')
+
+    sliders.forEach((slider) => {
+      const container = slider.querySelector('.swiper')
+      if (!container || container.swiper) return
+
+      const prevButton = slider.querySelector('.slider__button-prev')
+      const nextButton = slider.querySelector('.slider__button-next')
+
+      const createSwiper = () => {
+        if (container.swiper) return
+        new Swiper(container, {
+          modules: [Navigation, Autoplay],
+          loop: true,
+          slidesPerView: 3,
+          spaceBetween: 80,
+          grabCursor: true,
+          navigation: {
+            nextEl: nextButton,
+            prevEl: prevButton,
+          },
+          autoplay: {
+            delay: 5000,
+            disableOnInteraction: true,
+            pauseOnMouseEnter: true,
+          },
+          breakpoints: {
+            320: { slidesPerView: 1, spaceBetween: 20 },
+            768: { slidesPerView: 2, spaceBetween: 40 },
+            1024: { slidesPerView: 3, spaceBetween: 80 },
+          },
+        })
+      }
+
+      const panel = slider.closest('[role="tabpanel"]')
+      const isVisible = !panel || !panel.hidden
+
+      if (isVisible) {
+        createSwiper()
+      } else {
+        const observer = new ResizeObserver((entries) => {
+          for (const entry of entries) {
+            if (entry.contentRect.width > 0) {
+              createSwiper()
+              observer.disconnect()
+              break
+            }
+          }
+        })
+        observer.observe(container)
+      }
+    })
+  }
+
+  document.addEventListener('astro:page-load', initSliders)
+</script>
