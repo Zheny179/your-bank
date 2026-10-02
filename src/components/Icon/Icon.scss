@@ -1,29 +1,31 @@
 .icon {
-  @include flex-center;
-  @include square(fluid(98, 72));
-  
-  grid-row: 1;
-  position: relative;
-  font-size: fluid(34, 28);
-  color: var(--green-60);
-  background: linear-gradient(
-    180deg,
-    rgba(202, 255, 51, 0.05) 0%,
-    rgba(202, 255, 51, 0) 100%
-  );
-  border-radius: var(--border-radius-70);
-  margin-inline: auto;
-  
-  &::before {
-    @include abs-center;
-    @include square(fluid(74, 56));
+  &--custom {
+    @include flex-center;
+    @include square(fluid(98, 72));
     
-    content: '';
-    background: inherit;
-    border-radius: inherit;
-  }
-  
-  &--small {
-    font-size: fluid(30, 28);
+    grid-row: 1;
+    position: relative;
+    font-size: fluid(34, 28);
+    color: var(--green-60);
+    background: linear-gradient(
+      180deg,
+      rgba(202, 255, 51, 0.05) 0%,
+      rgba(202, 255, 51, 0) 100%
+    );
+    border-radius: var(--border-radius-70);
+    margin-inline: auto;
+    
+    &::before {
+      @include abs-center;
+      @include square(fluid(74, 56));
+      
+      content: '';
+      background: inherit;
+      border-radius: inherit;
+    }
+    
+    &--small {
+      font-size: fluid(30, 28);
+    }
   }
 }

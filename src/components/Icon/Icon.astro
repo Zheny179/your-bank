@@ -6,9 +6,10 @@ interface Props {
   className?: string;
   iconName: string;
   iconSize?: string;
+  variant?: '' | 'custom'
 }
 
-const { className, iconName, iconSize } = Astro.props
+const { className, iconName, iconSize, variant = '' } = Astro.props
 ---
 
 <div
@@ -16,6 +17,7 @@ const { className, iconName, iconSize } = Astro.props
     "icon", className, {
       'icon--small': iconSize === 'small',
       'icon--big': iconSize === 'big',
+      'icon--custom': variant === 'custom',
     }
   ] }
   aria-hidden="true"
