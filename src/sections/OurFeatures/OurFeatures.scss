@@ -38,6 +38,15 @@
       color: var(--absolute-white);
       background-color: var(--grey-11);
       border: var(--border);
+      transition: border-color var(--transition-duration), scale var(--transition-duration);
+      
+      @include hover {
+        border-color: var(--green-60);
+      }
+      
+      &:active {
+        scale: 1.01;
+      }
       
       @include laptop {
         padding: 14px 20px;
