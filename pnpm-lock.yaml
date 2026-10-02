@@ -21,7 +21,7 @@ importers:
         specifier: 0.35.3
         version: 0.35.3(@types/node@26.1.1)
       swiper:
-        specifier: ^14.3.0
+        specifier: 14.3.0
         version: 14.3.0
       typescript:
         specifier: 7.0.2
