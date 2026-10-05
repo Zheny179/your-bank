@@ -9,45 +9,47 @@ const { className } = Astro.props
 ---
 
 <div class:list={ ["slider", className] }>
-  <div class="slider__button slider__button-prev swiper-button-prev">
-    <svg
-      width="34"
-      height="34"
-      viewBox="0 0 34 34"
-      fill="none"
-      xmlns="http://www.w3.org/2000/svg"
-    >
-      <path
-        d="M26.2083 17H8.5M17 25.5L8.5 17L17 8.5"
-        stroke="#CAFF33"
-        stroke-width="2"
-        stroke-linecap="round"
-        stroke-linejoin="round"
-      />
-    </svg>
-  </div>
   <div class="swiper slider__container">
     <div class="swiper-wrapper slider__wrapper">
       <slot />
     </div>
 
   </div>
-  <div class="slider__button slider__button-next swiper-button-next">
-    <svg
-      width="34"
-      height="34"
-      viewBox="0 0 34 34"
-      fill="none"
-      xmlns="http://www.w3.org/2000/svg"
-    >
-      <path
-        d="M8.50016 17H26.2085M17.7085 25.5L26.2085 17L17.7085 8.5"
-        stroke="#CAFF33"
-        stroke-width="2"
-        stroke-linecap="round"
-        stroke-linejoin="round"
-      />
-    </svg>
+  <div class="slider__navigation">
+    <div class="slider__button slider__button-prev swiper-button-prev">
+      <svg
+        width="34"
+        height="34"
+        viewBox="0 0 34 34"
+        fill="none"
+        xmlns="http://www.w3.org/2000/svg"
+      >
+        <path
+          d="M26.2083 17H8.5M17 25.5L8.5 17L17 8.5"
+          stroke="#CAFF33"
+          stroke-width="2"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+        />
+      </svg>
+    </div>
+    <div class="slider__button slider__button-next swiper-button-next">
+      <svg
+        width="34"
+        height="34"
+        viewBox="0 0 34 34"
+        fill="none"
+        xmlns="http://www.w3.org/2000/svg"
+      >
+        <path
+          d="M8.50016 17H26.2085M17.7085 25.5L26.2085 17L17.7085 8.5"
+          stroke="#CAFF33"
+          stroke-width="2"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+        />
+      </svg>
+    </div>
   </div>
 </div>
 
@@ -73,7 +75,10 @@ const { className } = Astro.props
           loop: true,
           slidesPerView: 3,
           spaceBetween: 80,
-          grabCursor: true,
+          centeredSlides: true,
+          initialSlide: 0,
+          observer: true,
+          observeParents: true,
           navigation: {
             nextEl: nextButton,
             prevEl: prevButton,
@@ -84,10 +89,10 @@ const { className } = Astro.props
             pauseOnMouseEnter: true,
           },
           breakpoints: {
-            320: { slidesPerView: 1, spaceBetween: 20 },
-            768: { slidesPerView: 2, spaceBetween: 40 },
-            1024: { slidesPerView: 3, spaceBetween: 80 },
-          },
+            320: { slidesPerView: 1, spaceBetween: 80, simulateTouch: true, },
+            1024: { slidesPerView: 2, spaceBetween: 80, simulateTouch: true, },
+            1440: { slidesPerView: 3, spaceBetween: 80, simulateTouch: false, },
+          }
         })
       }
 
