@@ -23,6 +23,7 @@ const headingId = `${ sectionId }-title`
 
 const hasHeader = Astro.slots.has('header')
 const isTabs = tabs && tabs.length > 0
+const showHeader = hasHeader || isTabs
 ---
 
 <section
@@ -35,17 +36,19 @@ const isTabs = tabs && tabs.length > 0
   aria-labelledby={ hasHeader ? headingId : undefined }
   {...restProps}
 >
-  <header class="section__header">
-    <div class="section__info">
-      <slot name="header" />
-    </div>
-    { isTabs && (
-      <Tabs
-        tabs={ tabs }
-        baseId={ sectionId }
-      />
-    ) }
-  </header>
+  { showHeader && (
+    <header class="section__header">
+      { hasHeader && (
+        <div class="section__info">
+          <slot name="header" />
+        </div>) }
+      { isTabs && (
+        <Tabs
+          tabs={ tabs }
+          baseId={ sectionId }
+        />
+      ) }
+    </header>) }
   <div class="section__body">
     <slot />
   </div>
