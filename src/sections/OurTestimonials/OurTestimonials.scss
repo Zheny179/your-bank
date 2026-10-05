@@ -3,11 +3,10 @@
   }
   
   & &__slide {
-    display: flex;
+    @include flex-center;
+    
     flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    gap: 50px;
+    gap: fluid(50, 30);
   }
   
   &__quote {
@@ -15,7 +14,7 @@
     color: var(--absolute-white);
     margin: 0;
     display: grid;
-    gap: 50px;
+    gap: fluid(50, 30);
     text-align: center;
     
     &-icon {
@@ -23,24 +22,21 @@
       width: 100%;
       text-align: center;
       
-      &::before {
+      &::before,
+      &::after {
         @include abs-y;
-        translate: -108.6% -50%;
-        
         content: '';
         width: 37.6%;
         height: 1px;
         background-color: var(--grey-15);
       }
       
+      &::before {
+        translate: -108.6% -50%;
+      }
+      
       &::after {
-        @include abs-y;
         translate: 8% -50%;
-        
-        content: '';
-        width: 37.6%;
-        height: 1px;
-        background-color: var(--grey-15);
       }
     }
   }

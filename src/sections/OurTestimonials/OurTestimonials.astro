@@ -2,7 +2,6 @@
 import './OurTestimonials.scss'
 import Section from '@/components/Section/Section.astro'
 import Slider from '@/components/Slider/Slider.astro'
-import QuoteIcon from '@/components/Icons/QuoteIcon/QuoteIcon.astro'
 
 interface Testimonial {
   text: string
@@ -34,6 +33,14 @@ const testimonialTabs: TestimonialTab[] = [
         text: 'Customer support is top-notch. They resolved my issue in minutes.',
         author: 'Emily K',
       },
+      {
+        text: 'YourBank made getting a mortgage stress-free. Their team guided us through every step and got us a great rate.',
+        author: 'Sarah M',
+      },
+      {
+        text: 'The mobile app is fantastic. I can manage all my accounts in seconds.',
+        author: 'Mike R',
+      },
     ]
   },
   {
@@ -52,8 +59,16 @@ const testimonialTabs: TestimonialTab[] = [
         author: 'Mike R',
       },
       {
+        text: 'YourBank made getting a mortgage stress-free. Their team guided us through every step and got us a great rate. 2',
+        author: 'Sarah M',
+      },
+      {
         text: 'Customer support is top-notch. They resolved my issue in minutes. 2',
         author: 'Emily K',
+      },
+      {
+        text: 'The mobile app is fantastic. I can manage all my accounts in seconds. 2',
+        author: 'Mike R',
       },
     ]
   },
