@@ -1,5 +1,6 @@
 ---
 import './Slider.scss'
+import 'swiper/css'
 
 interface Props {
   className?: string;
@@ -56,13 +57,13 @@ const { className } = Astro.props
 <script>
   import Swiper from 'swiper'
   import { Navigation, Autoplay } from 'swiper/modules'
-  import 'swiper/css'
 
   function initSliders() {
     const sliders = document.querySelectorAll('.slider')
 
     sliders.forEach((slider) => {
-      const container = slider.querySelector('.swiper')
+      const container = slider.querySelector('.swiper') as any
+
       if (!container || container.swiper) return
 
       const prevButton = slider.querySelector('.slider__button-prev')
@@ -97,7 +98,7 @@ const { className } = Astro.props
       }
 
       const panel = slider.closest('[role="tabpanel"]')
-      const isVisible = !panel || !panel.hidden
+      const isVisible = !panel || !panel.hasAttribute('hidden')
 
       if (isVisible) {
         createSwiper()
