@@ -10,3 +10,8 @@ export interface Contact {
   value: string
   label: string
 }
+
+export interface NavigationItem {
+  href: string
+  label: string
+}

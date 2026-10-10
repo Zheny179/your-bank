@@ -1,16 +1,9 @@
 ---
 import './Navigation.scss'
+import { navigationItems } from '@/data/navigation.ts'
 
 const currentURL = Astro.url.pathname
 const BASE_URL = import.meta.env.BASE_URL
-
-const navigationItems = [
-  { href: '', label: 'Home' },
-  { href: 'careers/', label: 'Careers' },
-  { href: 'about/', label: 'About' },
-  { href: 'security/', label: 'Security' },
-]
-
 const { className, extraAttrs = {}, context = 'header' } = Astro.props
 const normalizeUrl = (url: string) => url.replace(/\/$/, '').toLowerCase()
 ---
