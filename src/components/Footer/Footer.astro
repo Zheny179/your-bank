@@ -3,11 +3,14 @@ import './Footer.scss'
 import Logo from '@/components/Logo/Logo.astro'
 import Navigation from '@/components/Navigation/Navigation.astro'
 import { Icon } from 'astro-icon/components'
+import { socialLinks } from '@/data/socials'
+import { contacts } from '@/data/contacts'
 
 const BASE_URL = import.meta.env.BASE_URL
 ---
 
 <footer class="footer">
+  <h2 class="visually-hidden">Подвал сайта</h2>
   <div class="footer__inner container">
     <div class="footer__top">
       <Logo />
@@ -18,88 +21,79 @@ const BASE_URL = import.meta.env.BASE_URL
     </div>
     <div class="footer__body">
       <ul class="footer__contacts">
-        <li class="footer__contacts-item">
-          <Icon name="letter" />
-          <a
-            class="footer__contacts-link"
-            href="mailto:hello@skillbirdge.com"
-          >
-            hello@skillbirdge.com
-          </a>
-        </li>
-        <li class="footer__contacts-item">
-          <Icon name="tel" />
-          <a
-            class="footer__contacts-link"
-            href="tel:+9191813232309"
-          >
-            +91 91813 23 2309
-          </a>
-        </li>
-        <li class="footer__contacts-item">
-          <Icon name="marker-map" />
-          <address class="footer__address">
-            Somewhere in the World
-          </address>
-        </li>
+        { contacts.map((contact) => (
+          <li class="footer__contacts-item">
+            <Icon
+              name={ contact.icon }
+              aria-hidden="true"
+              focusable="false"
+            />
+            { contact.type === 'email' && (
+              <a
+                class="footer__contacts-link"
+                href={ `mailto:${ contact.value }` }
+              >
+                { contact.label }
+              </a>
+            ) }
+            { contact.type === 'phone' && (
+              <a
+                class="footer__contacts-link"
+                href={ `tel:${ contact.value }` }
+              >
+                { contact.label }
+              </a>
+            ) }
+            { contact.type === 'address' && (
+              <address class="footer__address">
+                { contact.label }
+              </address>
+            ) }
+          </li>
+        )) }
       </ul>
     </div>
     <div class="footer__bottom">
       <div class="footer__soc1als">
         <ul class="footer__soc1als-list">
-          <li class="footer__soc1als-item">
-            <a
-              class="footer__soc1als-link"
-              href="https://facebook.com"
-              target="_blank"
-            >
-              <Icon
-                title="facebook"
-                name="facebook"
-              />
-            </a>
-          </li>
-          <li class="footer__soc1als-item">
-            <a
-              class="footer__soc1als-link"
-              href="https://twitter.com"
-              target="_blank"
-            >
-              <Icon
-                title="twitter"
-                name="twitter"
-              />
-            </a>
-          </li>
-          <li class="footer__soc1als-item">
-            <a
-              class="footer__soc1als-link"
-              href="https://linkedin.com"
-              target="_blank"
-            >
-              <Icon
-                title="LinkedIn"
-                name="in"
-              />
-            </a>
-          </li>
+          { socialLinks.map((social) => (
+            <li class="footer__soc1als-item">
+              <a
+                class="footer__soc1als-link"
+                href={ social.url }
+                target="_blank"
+                aria-label={ `${ social.title } (открывается в новой вкладке)` }
+              >
+                <Icon
+                  title={ social.title }
+                  name={ social.name }
+                  aria-hidden="true"
+                  focusable="false"
+                />
+              </a>
+            </li>
+          )) }
         </ul>
       </div>
       <div class="footer__copyright">YourBank All Rights Reserved</div>
-      <div class="footer__legal">
-        <a
-          class="footer__legal-link"
-          href={ `${ BASE_URL }/privacy-policy` }
-        >
-          Privacy Policy
-        </a>
-        <a
-          class="footer__legal-link"
-          href={ `${ BASE_URL }/terms-of-service` }
-        >
-          Terms of Service
-        </a>
-      </div>
+      <ul class="footer__legal">
+        <li>
+          <a
+            class="footer__legal-link"
+            href={ `${ BASE_URL }/privacy-policy` }
+          >
+            Privacy Policy
+          </a>
+        </li>
+        <li>
+          <a
+            class="footer__legal-link"
+            href={ `${ BASE_URL }/terms-of-service` }
+          >
+            Terms of Service
+          </a>
+        </li>
+      </ul>
     </div>
   </div>
 </footer>
