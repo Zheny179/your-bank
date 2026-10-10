@@ -4,13 +4,13 @@ import BurgerMenu from '../BurgerMenu/BurgerMenu.astro'
 import Navigation from '../Navigation/Navigation.astro'
 
 interface Props {
-  className?: string;
-  extraAttrs?: Record<string, string>;
+  className?: string
+  extraAttrs?: Record<string, string>
 }
 
 const {
   className,
-  extraAttrs
+  extraAttrs = {}
 } = Astro.props
 ---
 
@@ -34,25 +34,31 @@ const {
 
 <script>
   function initOverlayMenu() {
-    document.body.addEventListener('click', function (e) {
-      const burgerButtonElement = (e.target as HTMLElement).closest<HTMLElement>(
-        '[data-burger]'
-      )
+    const overlayMenuElement = document.querySelector<HTMLElement>(
+      '[data-overlay-menu]')
+
+    if (!overlayMenuElement || overlayMenuElement.dataset.initialized) {
+      return
+    }
+
+    overlayMenuElement.dataset.initialized = 'true'
+
+    overlayMenuElement.addEventListener('click', function (e) {
+      const target = e.target as HTMLElement
+      const burgerButtonElement = target.closest<HTMLElement>('[data-burger]')
+
       if (burgerButtonElement) {
         handleMenuToggle(burgerButtonElement)
         return
       }
 
-      const overlayPanel = (e.target as HTMLElement).closest<HTMLElement>(
-        '.overlay-menu__panel'
-      )
-      if (overlayPanel && e.target === overlayPanel) {
-        const menuContainer = overlayPanel.closest<HTMLElement>(
-          '[data-overlay-menu]'
-        )
-        const associatedBurger = menuContainer?.querySelector<HTMLElement>(
+      const overlayPanel = target.closest<HTMLElement>('.overlay-menu__panel')
+
+      if (overlayPanel && target === overlayPanel) {
+        const associatedBurger = overlayMenuElement.querySelector<HTMLElement>(
           '[data-burger]'
         )
+
         if (associatedBurger) {
           handleMenuToggle(associatedBurger)
         }
@@ -60,17 +66,48 @@ const {
     })
 
     document.addEventListener('keydown', function (e) {
-      if (e.key === 'Escape' || e.key === 'Esc') {
-        const activeMenu = document.querySelector<HTMLElement>(
-          '.overlay-menu.is-open'
+      if ((e.key === 'Escape' || e.key === 'Esc') &&
+        overlayMenuElement.classList.contains('is-open')) {
+
+        const associatedBurger = overlayMenuElement.querySelector<HTMLElement>(
+          '[data-burger]'
         )
-        if (activeMenu) {
-          const associatedBurger = activeMenu.querySelector<HTMLElement>(
-            '[data-burger]'
-          )
-          if (associatedBurger) {
-            handleMenuToggle(associatedBurger)
-          }
+
+        if (associatedBurger) {
+          handleMenuToggle(associatedBurger)
+        }
+      }
+    })
+
+    overlayMenuElement.addEventListener('keydown', (e) => {
+      if (e.key !== 'Tab') {
+        return
+      }
+
+      if (!overlayMenuElement.classList.contains('is-open')) {
+        return
+      }
+
+      const focusableElements = overlayMenuElement.querySelectorAll<HTMLElement>(
+        'a[href], button:not([disabled]), [tabindex]:not([tabindex="-1"])'
+      )
+
+      if (focusableElements.length === 0) {
+        return
+      }
+
+      const firstElement = focusableElements[0]
+      const lastElement = focusableElements[focusableElements.length - 1]
+
+      if (e.shiftKey) {
+        if (document.activeElement === firstElement) {
+          lastElement.focus()
+          e.preventDefault()
+        }
+      } else {
+        if (document.activeElement === lastElement) {
+          firstElement.focus()
+          e.preventDefault()
         }
       }
     })
@@ -80,12 +117,13 @@ const {
     const overlayMenuElement = burgerButtonElement.closest<HTMLElement>(
       '[data-overlay-menu]'
     )
-    if (!overlayMenuElement) return
+    if (!overlayMenuElement) {
+      return
+    }
 
     const navigationElement = overlayMenuElement.querySelector<HTMLElement>(
       '[data-navigation]'
     )
-
     const isExpanded = burgerButtonElement.getAttribute(
       'aria-expanded'
     ) === 'true'
@@ -97,21 +135,14 @@ const {
       isOpen ? 'Закрыть меню навигации' : 'Открыть меню навигации'
     )
 
-    if (isOpen) {
-      burgerButtonElement.dataset.burger = 'active'
-    } else {
-      burgerButtonElement.dataset.burger = ''
-    }
-
+    burgerButtonElement.classList.toggle('is-active', isOpen)
     navigationElement?.classList.toggle('navigation--active', isOpen)
     overlayMenuElement?.classList.toggle('is-open', isOpen)
     document.documentElement.classList.toggle('is-lock', isOpen)
 
     if (isOpen) {
-      const firstLink = navigationElement?.querySelector<HTMLElement>(
-        'a'
-      )
-      setTimeout(() => firstLink?.focus(), 100)
+      const firstLink = navigationElement?.querySelector<HTMLElement>('a')
+      requestAnimationFrame(() => firstLink?.focus())
     } else {
       burgerButtonElement.focus()
     }
