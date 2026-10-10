@@ -4,6 +4,8 @@ import Logo from '@/components/Logo/Logo.astro'
 import Navigation from '@/components/Navigation/Navigation.astro'
 import OverlayMenu from '@/components/OverlayMenu/OverlayMenu.astro'
 import Button from '@/components/Button/Button.astro'
+
+const BASE_URL = import.meta.env.BASE_URL
 ---
 
 <header class="header container">
@@ -18,51 +20,16 @@ import Button from '@/components/Button/Button.astro'
       <Button
         className="header__action"
         variant="transparent"
-        href="sign-up"
+        href={ `${ BASE_URL }sign-up` }
       >
         Sign Up
       </Button>
       <Button
         className="header__action"
-        href="login"
+        href={ `${ BASE_URL }login` }
       >
         Login
       </Button>
     </div>
   </div>
 </header>
-
-<script>
-  const overlayMenuElement = document.querySelector<HTMLElement>(
-    '[data-overlay-menu]')
-
-  overlayMenuElement?.addEventListener('keydown', (e) => {
-    if (e.key !== 'Tab') {
-      return
-    }
-
-
-    const focusableElement = overlayMenuElement?.querySelectorAll<HTMLElement>(
-      'a[href], button:not([disabled])'
-    )
-
-    if (focusableElement.length === 0) {
-      return
-    }
-
-    const firstElement = focusableElement[0]
-    const lastElement = focusableElement[focusableElement.length - 1]
-
-    if (e.shiftKey) {
-      if (document.activeElement === firstElement) {
-        lastElement.focus()
-        e.preventDefault()
-      }
-    } else {
-      if (document.activeElement === lastElement) {
-        firstElement.focus()
-        e.preventDefault()
-      }
-    }
-  })
-</script>
