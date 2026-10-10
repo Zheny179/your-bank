@@ -5,6 +5,7 @@ import './Logo.scss'
 <a
   class="logo"
   href={ import.meta.env.BASE_URL }
+  aria-label="YourBank — на главную страницу"
 >
   <svg
     width="156"
@@ -12,8 +13,9 @@ import './Logo.scss'
     viewBox="0 0 156 41"
     fill="none"
     xmlns="http://www.w3.org/2000/svg"
+    aria-hidden="true"
+    focusable="false"
   >
-    <title>Logotype</title>
     <g class="logo__icon">
       <path
         class="logo__rhombus"
@@ -80,8 +82,13 @@ import './Logo.scss'
     const logoElement = document.querySelector('.logo')
     const rhombusElement = document.querySelector('.logo__rhombus')
 
-    let isMouseOut = false
+    const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches
 
+    if (prefersReducedMotion) {
+      return
+    }
+
+    let isMouseOut = false
 
     logoElement?.addEventListener('mouseenter', () => {
       isMouseOut = false
