@@ -5,11 +5,16 @@ import { Icon as AstroIcon } from 'astro-icon/components'
 interface Props {
   className?: string;
   iconName: string;
-  iconSize?: string;
+  iconSize?: 'small' | 'big';
   variant?: '' | 'custom'
 }
 
-const { className, iconName, iconSize, variant = '' } = Astro.props
+const {
+  className,
+  iconName,
+  iconSize,
+  variant = ''
+} = Astro.props
 ---
 
 <div
