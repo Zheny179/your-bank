@@ -17,7 +17,7 @@
     scale: (1.02);
   }
   
-  &[data-burger='active'] {
+  &.is-active {
     .burger-menu__line:first-child {
       rotate: 45deg;
       translate: 0 6px;
