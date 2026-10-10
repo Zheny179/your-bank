@@ -11,7 +11,8 @@ const navigationItems = [
   { href: 'security/', label: 'Security' },
 ]
 
-const { className, extraAttrs, context = 'header' } = Astro.props
+const { className, extraAttrs = {}, context = 'header' } = Astro.props
+const normalizeUrl = (url: string) => url.replace(/\/$/, '').toLowerCase()
 ---
 
 <nav
@@ -22,22 +23,22 @@ const { className, extraAttrs, context = 'header' } = Astro.props
   <ul class="navigation__list">
     { navigationItems.map(({ href, label }) => {
       const targetURL = `${ BASE_URL }${ href }`
-      const isActive = currentURL === targetURL
+      const isActive = normalizeUrl(currentURL) === normalizeUrl(targetURL)
 
       return (
         <li class="navigation__item">
           <a
             class:list={ [
               'navigation__link', {
-                'navigation__link--active': currentURL === targetURL
+                'navigation__link--active': isActive
               }
             ] }
             href={ targetURL }
-            aria-label={ label }
             aria-current={ isActive ? 'page' : undefined }
             style={ isActive
               ? `view-transition-name: active-menu-indicator-${ context };`
-              : undefined }
+              : undefined
+            }
           >
             { label }
           </a>
